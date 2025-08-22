@@ -14,27 +14,164 @@ a {
 }
 
 @font-face {
-  font-family: "Kanit";
-  src: local(""Kanit""),
-    url("../fonts/Kanit-Regular.woff2") format("woff2"),
-    url("../fonts/Kanit-Regular.woff2") format("woff");
-  font-weight: 400; 
-  font-style: normal;
-  font-display: swap;
+    font-family: "Kanit";
+    src: local("" Kanit""),
+        url("../fonts/Kanit-Regular.woff2") format("woff2"),
+        url("../fonts/Kanit-Regular.woff2") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: "Kanit";
-  src: local("Kanit-Medium"),
-    url("../fonts/Kanit-Medium.woff2") format("woff2"),
-    url("../fonts/Kanit-Medium.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+    font-family: "Kanit";
+    src: local("Kanit-Medium"),
+        url("../fonts/Kanit-Medium.woff2") format("woff2"),
+        url("../fonts/Kanit-Medium.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --text-color: #252525;
+    --primary-color: #6c63ff;
+    --bg-color: #f7f7f7;
+    --border: #6c63ff;
+}
+
+[data-theme="dark"] {
+    --text-color: #f7f7f7;
+    --primary-color: #6c63ff;
+    --bg-color: #252525;
+    --border: #f7f7f7;
 }
 
 body {
     min-width: 320px;
     font-family: "Kanit", sans-serif;
-    font-weight: 400 ;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    background-color: var(--bg-color);
 }
+
+/* global */
+.container {
+    max-width: 950px;
+    padding: 0 100px;
+    margin: 0 auto;
+}
+
+.list-reset {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+}
+
+.btn-reset {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* app */
+.app-container {
+    padding: 40px 0;
+    flex-direction: column;
+}
+
+.app-title {
+    text-align: center;
+    margin-bottom: 18px;
+    transition: all 0.3s ease;
+}
+
+.app-search {
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 8px 16px;
+    width: 70%;
+    height: 38px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.app-select {
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    background-color: var(--border);
+    color: balck;
+    padding: 10px;
+    width: 85px;
+    height: 38px;
+    transition: all 0.3s ease;
+}
+
+.inputs-wrap {
+    width: 100%;
+    gap: 16px;
+}
+
+/* checkbox */
+.switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 38px;
+    background-color: var(--border);
+    transition: .5s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 50%;
+    left: 10%;
+    bottom: 18%;
+    box-shadow: inset 8px -4px 0px 0px #f7f7f7;
+    background: var(--border);
+    transition: .5s;
+}
+
+input:checked+.slider {
+    background-color: var(--border);
+}
+
+input:checked+.slider:before {
+    transform: translateX(100%);
+    box-shadow: inset 15px -4px 0px 15px var(--primary-color);
+}
+
+/* select */

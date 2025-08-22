@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,33 @@
 
     <script src="/js/script.js" defer></script>
 </head>
+
 <body>
-    
+    <main class="main">
+        <section class="app">
+            <div class="container">
+                <div class="app-container flex">
+                    <h1 class="app-title title">Список дел</h1>
+                    <div class="inputs-wrap flex">
+                        <div class="">
+
+                        </div>
+                        <input class="app-search" type="text" id="app-seacrh">
+                        <select class="app-select" name="" id="app-select">
+                            <option value="all">Все</option>
+                            <option value="complete">Выполнено</option>
+                            <option value="incomplete">Не выполнено</option>
+                        </select>
+                        <label class="switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="app-notes"></div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>
