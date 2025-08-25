@@ -38,12 +38,16 @@ a {
     --primary-color: #6c63ff;
     --bg-color: #f7f7f7;
     --border: #6c63ff;
+    --hover: #534cc2;
+    --shadow: rgba(108, 99, 255, 0.2);
 }
 
 [data-theme="dark"] {
     --text-color: #f7f7f7;
     --bg-color: #252525;
     --border: #f7f7f7;
+    --hover: #a1a1a1;
+    --shadow: rgba(236, 236, 236, 0.445);
 }
 
 body {
@@ -128,6 +132,15 @@ body {
     transition: all 0.3s ease;
 }
 
+.app-search:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--shadow);
+}
+
+.app-search:hover {
+    box-shadow: 0 0 0 3px var(--shadow);
+}
+
 .app-select {
     border-radius: 30px;
     border: 1px solid var(--border);
@@ -136,12 +149,37 @@ body {
     padding: 0 10px;
     width: 100px;
     height: 38px;
+    cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.app-select:hover {
+    box-shadow: 0 0 0 3px var(--shadow);
 }
 
 .inputs-wrap {
     width: 100%;
     gap: 16px;
+}
+
+.edit-btn:hover svg path {
+    stroke: #6C63FF;
+    transition: stroke 0.2s ease;
+}
+
+.edit-btn:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.dlt-btn:hover svg path {
+    stroke: #ff4757;
+    transition: stroke 0.2s ease;
+}
+
+.dlt-btn:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
 }
 
 /* checkbox */
@@ -190,6 +228,10 @@ input:checked+.slider {
     background-color: var(--border);
 }
 
+input:checked+.slider:hover {
+    box-shadow: 0 0 0 3px var(--shadow);
+}
+
 input:checked+.slider:before {
     transform: translateX(100%);
     box-shadow: inset 15px -4px 0px 15px var(--primary-color);
@@ -204,6 +246,11 @@ input:checked+.slider:before {
     border-radius: 100%;
     background-color: var(--primary-color);
     box-shadow: 0 0 4px 0 var(--primary-color);
+    transition: background-color .3s ease;
+}
+
+.app-button:hover {
+    background-color: #534cc2;
 }
 
 .app-button::before,
@@ -287,6 +334,12 @@ input:checked+.slider:before {
     font-size: 18px;
     background-color: var(--bg-color);
     color: var(--primary-color);
+    transition: color .3s ease, border .3s ease;
+}
+
+.modal-btn-cancel:hover {
+    color: #534cc2;
+    border: 2px solid #534cc2;
 }
 
 .modal-btn-apply {
@@ -296,6 +349,11 @@ input:checked+.slider:before {
     font-size: 18px;
     background-color: var(--primary-color);
     color: #f7f7f7;
+    transition: background-color .3s ease;
+}
+
+.modal-btn-apply:hover {
+    background-color: #534cc2;
 }
 
 .app-notes {
