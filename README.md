@@ -30,7 +30,7 @@
 - **SVG** - Иконки и графика
 
 ### Светлая тема
-![Light Theme](./img/light-theme-empty.png)
+![Light Theme](img/light-theme-empty.png)
 
 ### Темная тема
 ![Dark Theme](./img/dark-theme-empty.png)
