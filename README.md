@@ -7,7 +7,7 @@
 
 Простое и элегантное веб-приложение для управления задачами с темной темой и удобным интерфейсом.
 
-![Todo App Preview](https://via.placeholder.com/800x400/6C63FF/ffffff?text=ToDo+App+Preview)
+![Todo App Preview](http://127.0.0.1:5500/index.html)
 
 ## ✨ Особенности
 
