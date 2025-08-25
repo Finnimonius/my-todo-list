@@ -7,7 +7,9 @@
 
 Простое и элегантное веб-приложение для управления задачами с темной темой и удобным интерфейсом.
 
-![Todo App Preview](https://finnimonius.github.io/my-todo-list/)
+## 🚀 Live Demo
+
+[![Open in GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-brightgreen)](https://finnimonius.github.io/my-todo-list/)
 
 ## ✨ Особенности
 
