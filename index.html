@@ -22,7 +22,7 @@
                     <h1 class="app-title title">Список дел</h1>
                     <div class="inputs-wrap flex">
                         <div class="search-wrap flex">
-                            <input class="app-search" type="text" id="app-seacrh">
+                            <input class="app-search" type="text" id="app-search">
                             <svg class="search-svg" id="search-svg" width="21" height="22" viewBox="0 0 21 22"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -42,7 +42,8 @@
                     </div>
                     <dialog class="app-modal" id="dialog">
                         <div class="app-modal-wrap flex">
-                            <h2 class="title modal-title">Новая заметка</h2>
+                            <h2 class="title modal-title" id="modal-title">Новая заметка</h2>
+                            <input type="hidden" id="edit-index" value="-1">
                             <input type="text" class="modal-input" id="modal-input">
                             <div class="modal-btn-wrap flex">
                                 <button class="modal-btn-cancel btn-reset" id="modal-cancel">Отменить</button>

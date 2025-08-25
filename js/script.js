@@ -10,15 +10,31 @@ const modalInput = document.getElementById("modal-input");
 const appNotes = document.getElementById("app-notes");
 
 const appSelect = document.getElementById("app-select");
+const modalTitle = document.getElementById("modal-title");
+const searchInput = document.getElementById("app-search");
+
+const editIndexInput = document.getElementById("edit-index");
 
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
+console.log(notes)
 
-const displayNotes = (filter = "all") => {
+const clearDialog = () => {
+    modalInput.value = ""
+}
+
+const displayNotes = (filter = "all", searchText = "") => {
     let filteredNotes = notes;
+
     if (filter === 'complete') {
         filteredNotes = notes.filter(note => note.completed);
     } else if (filter === 'incomplete') {
         filteredNotes = notes.filter(note => !note.completed);
+    }
+
+    if (searchText) {
+        filteredNotes = filteredNotes.filter(note =>
+            note.text.toLowerCase().includes(searchText.toLowerCase())
+        );
     }
 
     appNotes.innerHTML = "";
@@ -27,16 +43,17 @@ const displayNotes = (filter = "all") => {
         const emptySvg = document.createElement("div");
         emptySvg.classList.add("empty-svg");
         appNotes.append(emptySvg);
-        return
+        return;
     }
 
-    filteredNotes.forEach(note => {
-        const index = notes.findIndex(n => n.text === note.text && n.completed === note.completed);
+    filteredNotes.forEach((note, filteredIndex) => {
+        const realIndex = notes.findIndex(n => n === note);
+        
         appNotes.innerHTML += `<div class="note-box flex">
             <div class="note-wrap flex">
                 <div class="cntr flex">
-                    <input type="checkbox" id="cbx-${index}" class="hidden-xs-up" ${note.completed ? 'checked' : ''}>
-                    <label for="cbx-${index}" class="cbx"></label>
+                    <input type="checkbox" id="cbx-${realIndex}" class="hidden-xs-up" ${note.completed ? 'checked' : ''}>
+                    <label for="cbx-${realIndex}" class="cbx"></label>
                 </div>
                 <p class="descr note-descr" style="${note.completed ? 'text-decoration: line-through; opacity: 0.7;' : ''}">${note.text}</p>
             </div>
@@ -59,10 +76,44 @@ const displayNotes = (filter = "all") => {
     });
 }
 
+searchInput.addEventListener('input', (e) => {
+    const searchText = e.target.value.toLowerCase().trim();
+    displayNotes(appSelect.value, searchText);
+});
+
+searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        searchInput.value = '';
+        displayNotes(appSelect.value, '');
+    }
+});
+
 appNotes.addEventListener('change', (e) => {
     if (e.target.type === 'checkbox') {
         const index = parseInt(e.target.id.split('-')[1]);
         notes[index].completed = e.target.checked;
+        localStorage.setItem("notes", JSON.stringify(notes));
+        displayNotes(appSelect.value, searchInput.value);
+    }
+});
+
+appNotes.addEventListener("click", (e) => {
+    const target = e.target;
+    const noteElement = target.closest('.note-box');
+    if (!noteElement) return;
+    const checkbox = noteElement.querySelector('input[type="checkbox"]');
+    const index = parseInt(checkbox.id.split('-')[1]);
+
+    if (target.closest(".edit-btn")) {
+        modalInput.value = notes[index].text;
+        editIndexInput.value = index; 
+        modalTitle.textContent = "Редактировать заметку";
+        applyBtn.textContent = "Сохранить";
+        dialog.showModal();
+    }
+
+    if (target.closest(".dlt-btn")) {
+        notes.splice(index, 1);
         localStorage.setItem("notes", JSON.stringify(notes));
         displayNotes(appSelect.value);
     }
@@ -70,17 +121,24 @@ appNotes.addEventListener('change', (e) => {
 
 applyBtn.addEventListener("click", () => {
     const noteText = modalInput.value.trim();
+    const editIndex = parseInt(editIndexInput.value);
+    
     if (noteText) {
-        notes.push({ text: noteText, completed: false });
+        if (editIndex === -1) {
+            notes.push({ text: noteText, completed: false });
+        } else {
+            notes[editIndex].text = noteText;
+        }
+        
         localStorage.setItem("notes", JSON.stringify(notes));
-        displayNotes(appSelect.value);
-        modalInput.value = "";
+        displayNotes(appSelect.value, searchInput.value);
+        clearDialog();
         dialog.close();
     }
 })
 
 appSelect.addEventListener("change", (e) => {
-    displayNotes(e.target.value)
+    displayNotes(e.target.value, searchInput.value)
 })
 
 // Switch theme
@@ -101,17 +159,32 @@ themeToggle.addEventListener("change", () => {
 
 // Dialog 
 noteBtn.addEventListener("click", () => {
-    dialog.showModal()
-})
+    clearDialog();
+    editIndexInput.value = -1;
+    modalTitle.textContent = "Новая заметка";
+    applyBtn.textContent = "Сохранить";
+    dialog.showModal();
+});
 
 cancelBtn.addEventListener("click", () => {
+    clearDialog()
     dialog.close()
 })
 
+dialog.addEventListener('close', () => {
+    editIndexInput.value = -1;
+    modalTitle.textContent = "Новая заметка";
+    applyBtn.textContent = "Сохранить";
+});
+
 dialog.addEventListener('click', function (event) {
     if (event.target === dialog) {
+        clearDialog();
+        editIndexInput.value = -1;
+        modalTitle.textContent = "Новая заметка";
+        applyBtn.textContent = "Сохранить";
         dialog.close();
     }
 });
 
-displayNotes();
+displayNotes(appSelect.value, searchInput.value);
