@@ -42,7 +42,6 @@ a {
 
 [data-theme="dark"] {
     --text-color: #f7f7f7;
-    --primary-color: #6c63ff;
     --bg-color: #252525;
     --border: #f7f7f7;
 }
@@ -76,6 +75,7 @@ body {
     margin: 0;
     padding: 0;
     color: var(--text-color);
+    transition: all .3s ease;
 }
 
 .btn-reset {
@@ -87,7 +87,9 @@ body {
 
 /* app */
 .app-container {
+    position: relative;
     padding: 40px 0;
+    height: 100vh;
     flex-direction: column;
 }
 
@@ -97,11 +99,25 @@ body {
     transition: all 0.3s ease;
 }
 
+.search-wrap {
+    width: 80%;
+    align-items: center;
+}
+
+.search-svg {
+    margin-left: -40px;
+}
+
+.search-svg path {
+    fill: var(--border);
+    transition: all .3s ease;
+}
+
 .app-search {
     border: 1px solid var(--border);
     border-radius: 30px;
     padding: 8px 16px;
-    width: 70%;
+    width: 100%;
     height: 38px;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -112,9 +128,9 @@ body {
     border-radius: 30px;
     border: 1px solid var(--border);
     background-color: var(--border);
-    color: balck;
-    padding: 10px;
-    width: 85px;
+    color: var(--bg-color);
+    padding: 0 10px;
+    width: 100px;
     height: 38px;
     transition: all 0.3s ease;
 }
@@ -146,6 +162,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    width: 60px;
     height: 38px;
     background-color: var(--border);
     transition: .5s;
@@ -174,4 +191,93 @@ input:checked+.slider:before {
     box-shadow: inset 15px -4px 0px 15px var(--primary-color);
 }
 
-/* select */
+.app-button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 0;
+    bottom: 10%;
+    border-radius: 100%;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 4px 0 var(--primary-color);
+}
+
+.app-button::before,
+.app-button::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.app-button::before {
+    width: 20px;
+    height: 2px;
+}
+
+.app-button::after {
+    width: 2px;
+    height: 20px;
+}
+
+.app-modal {
+    padding: 18px 30px;
+    border: 2px solid white;
+    margin-top: 250px;
+    border-radius: 16px;
+    width: 600px;
+    height: 289px;
+    background: var(--bg-color);
+    transition: all .3s ease;
+}
+
+.app-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.app-modal-wrap {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-title {
+    margin-bottom: 25px;
+    font-size: 24px;
+    line-height: 100%;
+}
+
+.modal-input {
+    width: 100%;
+    height: 38px;
+    border-radius: 5px;
+    margin-bottom: 115px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border);
+}
+
+.modal-btn-wrap {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.modal-btn-cancel {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 10px 22px;
+    font-size: 18px;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.modal-btn-apply {
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 10px 22px;
+    font-size: 18px;
+    background-color: var(--primary-color);
+    color: #f7f7f7;
+}
