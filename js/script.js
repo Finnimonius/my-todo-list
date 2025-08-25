@@ -46,7 +46,7 @@ const displayNotes = (filter = "all", searchText = "") => {
         return;
     }
 
-    filteredNotes.forEach((note, filteredIndex) => {
+    filteredNotes.forEach((note) => {
         const realIndex = notes.findIndex(n => n === note);
         
         appNotes.innerHTML += `<div class="note-box flex">
