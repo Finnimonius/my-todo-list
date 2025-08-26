@@ -36,5 +36,5 @@
 
 ### Темная тема
 ![Dark Theme](./img/dark-theme-empty.PNG)
-![Dark Theme](./img/dark-theme-notes.png)
+![Dark Theme](./img/dark-theme-notes.PNG)
 
